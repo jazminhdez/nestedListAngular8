@@ -1,0 +1,26 @@
+<div *ngFor="let item of childs">
+    <ul >
+     <li>
+      <div  *ngIf="!item.editFlag">
+      <span>{{item.id}} {{item.text}}</span>  
+      <button  title="add element" (click)="add(item)">save</button>
+      <button  title="edit element" (click)="edit(item)">edit</button>
+      <button  title="delete element" (click)="delete(item,childs)">delete</button>
+    </div>
+    <div *ngIf="item.editFlag">
+      <input #elementName value={{item.text}}>
+
+      <button  title="save element" (click)="save(elementName.value, item); elementName.value=''">save</button>
+      <button  title="cancel" (click)="cancel(item);elementName.value=''">Cancel</button>
+    </div>  
+    <div *ngIf="item.saveFlag">
+        <input #elementName>
+        <button  title="save element" (click)="addElement(elementName.value, item); elementName.value=''">save</button>
+        <button  title="cancel" (click)="cancel(item);elementName.value=''">Cancel</button>
+    </div>  
+      <app-list [childs]="item.child" *ngIf="item.child"></app-list>
+     
+     </li>
+    </ul>
+   
+</div>
